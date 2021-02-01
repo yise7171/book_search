@@ -8,13 +8,15 @@ class Home extends React.Component {
     state = {
         isLoading: true,
         books: [],
-        value: ""
+        value: "",
+        clientId: "",
+        secretKey: ""
     };
 
     // 네이버 API의 키값을 이용하여 검색
     getBook = async () => {
-        const ID_KEY = 'MDaxbiSW4Okp4DzEtEIn';
-        const SECRET_KEY = 'w5wKhD4ukv';
+        const ID_KEY = this.state.clientId;
+        const SECRET_KEY = this.state.secretKey;
         const search = this.state.value;
         try {
             if (search === "") {
@@ -56,6 +58,14 @@ class Home extends React.Component {
         this.setState({ value: e.target.value });
     };
 
+    handleChangeId = (e) => {
+        this.setState({ clientId: e.target.clientId });
+    };
+
+    handleChangeKey = (e) => {
+        this.setState({ secretKey: e.target.secretKey });
+    };
+
     handleSubmit = (e) => {
         e.preventDefault();
         this.getBook();
@@ -79,6 +89,8 @@ class Home extends React.Component {
                                     <div className="input_div">
                                         <h1>도서 검색</h1>
                                         <input className="input_search" type="text" value={this.state.value} onChange={this.handleChange} placeholder="도서명을 검색해 보세요." />
+                                        <input className="input_clientid" type="text" value={this.state.clientId} onChange={this.handleChangeId} placeholder="API Client ID를 입력하세요" />
+                                        <input className="input_secretkey" type="text" value={this.state.secretKey} onChange={this.handleChangeKey} placeholder="API Scret Key를 입력하세요." />
                                         <button type="submit">검색</button>
                                     </div>
                                     <div className="books"> {
