@@ -38,12 +38,33 @@ npm i prop-types
 ```
 // 웹에서 디렉토리 라우트를 수행하는 라이브러리
 npm i react-router-dom
+
+// exact={true} 옵션: path따라 정확히 렌더링 수행
+// "/"
+// "/search"의 경우
+// <Route path="/" exact={true} component={Home} /> 설정 시
+// 'localhost:3000/#/'만 랜더링 수행
+```
+
+```
+// github  homepage 등록
+npm i gh-pages
+homepage 항목 추가
+// {
+//    "homepage" : "https://(GitHub ID).github.io/(Repository name)/"
+// }
+// script 추가
+// {
+//   "script": {
+//     "predeploy": "npm run build",
+//     "deploy": "gh-pages -d build"
+//   }
+// }
 ```
 
 - github 등록
 
 ```
-
 git init .
 git remote add origin https://github.com/yise7171/book_search
 
@@ -56,9 +77,11 @@ git config --global core.autocrlf true
 git add .
 git commit -m "#1.0 Book Search with React"
 git push -u origin master
-
+//push 에러 시
+git pull origin master
+git push -u origin +master
 ```
 
 ```
-
+ "https://openapi.naver.com/v1/search/book.xml?query=리액트&display=10&start=1
 ```
