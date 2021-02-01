@@ -33,7 +33,8 @@ class Home extends React.Component {
                     },
                     headers: {
                         'X-Naver-Client-Id': ID_KEY,
-                        'X-Naver-Client-Secret': SECRET_KEY
+                        'X-Naver-Client-Secret': SECRET_KEY,
+                        'Access-Control-Allow-Origin': '*'
                     }
                 });
                 // State를 직접 저자아지 않기 위해 book 정보를 저장

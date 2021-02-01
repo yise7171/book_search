@@ -83,5 +83,12 @@ git push -u origin +master
 ```
 
 ```
- "https://openapi.naver.com/v1/search/book.xml?query=리액트&display=10&start=1
+ https://openapi.naver.com/v1/search/book.xml?query=리액트&display=10&start=1
 ```
+
+- CORS 해결 방안
+  - express 서버 설정
+  ```
+  npm i express
+  npm i cors
+  ```
