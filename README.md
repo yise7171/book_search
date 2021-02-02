@@ -93,24 +93,38 @@ git push -u origin +master
 1. proxy 사용
 
    ```
-   package.json에 추가
-   "proxy":"https://openapi.naver.com"
-
-   await axios.get('https://openapi.naver.com/v1/search/book.json', {
-   =>
-   await axios.get('/v1/search/book.json', {
-
-   문제점: 서버로 배포나 github page 배포 시에는 CORS 문제를 해결할 수 없으며 개발환경에서만 적용됨
+   1. package.json에 추가
+     "proxy":"https://openapi.naver.com"
+   2. axios 접속 변경
+     await axios.get('https://openapi.naver.com/v1/search/book.json', {
+     =>
+     await axios.get('/v1/search/book.json', {
+   3. 문제점
+     서버로 배포나 github page 배포 시에는 CORS 문제를 해결할 수 없으며 개발환경에서만 적용됨
    ```
 
 2. Proxy server를 같이 생성하여 사용하는 방법
 
    ```
-    http-proxy-middleware 설치
+    1. http-proxy-middleware 설치
       npm i http-proxy-middleware --save
-    setupProxy.js( createProxyMiddleware 작성 )
+    2. setupProxy.js( createProxyMiddleware 작성 )
+    3. axios 접속 변경
+      await axios.get('https://openapi.naver.com/v1/search/book.json', {
+      =>
+      await axios.get('/api/v1/search/book.json', {
+   ```
 
+3. 서버 생성
+
+```
+nodejs 무중단 pm2 기동
+ 1. npm install -g pm2@latest
+ 2. server.js 작성
+ 3. pm2 start ./src/servers/server.js --name book_api_server
+ 4. pm2 list
+ 5. axios 접속 변경
     await axios.get('https://openapi.naver.com/v1/search/book.json', {
     =>
-    await axios.get('/api/v1/search/book.json', {
-   ```
+    await axios.get('http://localhost:3001', {
+```

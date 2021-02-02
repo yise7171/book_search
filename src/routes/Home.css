@@ -13,6 +13,15 @@
   font-weight: 300;
 }
 
+.input_div {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 150px;
+  padding-top: 20px;
+  width: 100%;
+}
+
 .books {
   display: flex;
   justify-content: space-between;
@@ -49,7 +58,7 @@
   color: #777777;
 }
 
-button {
+.input_div button {
   background-color: #4caf50; /* Green */
   border: none;
   color: white;

@@ -19,7 +19,8 @@ app.use('/', (req, res) => {
     axios.get('https://openapi.naver.com/v1/search/movie.json', {
         params: {
             query: word,
-            display: 20
+            display: 10,
+            start: 1
         },
         headers: {
             'X-Naver-Client-Id': ID_KEY,

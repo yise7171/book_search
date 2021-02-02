@@ -25,7 +25,7 @@ function SearchBook({ id, year, title, summary, poster, actor, director }) {
                     <h5 className="book__year">{year}</h5>
                     <p className="book__director">{director}</p>
                     <p className="book__actor">{actor}</p>
-                    <p className="book__summary">{summary.slice(0, 180)}...</p>
+                    <p className="book__summary">{summary.slice(0, 100)}...</p>
                 </div>
             </Link>
         </div>
