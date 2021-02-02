@@ -87,8 +87,30 @@ git push -u origin +master
 ```
 
 - CORS 해결 방안
-  - express 서버 설정
-  ```
-  npm i express
-  npm i cors
-  ```
+
+출처: https://msyu1207.tistory.com/entry/React로-영화-정보를-검색해보자-두번째-네이버-API-사용-CORS-설정-하기 [Lotts Blog]
+
+1. proxy 사용
+
+   ```
+   package.json에 추가
+   "proxy":"https://openapi.naver.com"
+
+   await axios.get('https://openapi.naver.com/v1/search/book.json', {
+   =>
+   await axios.get('/v1/search/book.json', {
+
+   문제점: 서버로 배포나 github page 배포 시에는 CORS 문제를 해결할 수 없으며 개발환경에서만 적용됨
+   ```
+
+2. Proxy server를 같이 생성하여 사용하는 방법
+
+   ```
+    http-proxy-middleware 설치
+      npm i http-proxy-middleware --save
+    setupProxy.js( createProxyMiddleware 작성 )
+
+    await axios.get('https://openapi.naver.com/v1/search/book.json', {
+    =>
+    await axios.get('/api/v1/search/book.json', {
+   ```

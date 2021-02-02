@@ -25,7 +25,7 @@ class Home extends React.Component {
                 // 네이버 API 검색
                 const { data: {
                     items
-                } } = await axios.get('https://openapi.naver.com/v1/search/book.json', {
+                } } = await axios.get('/api/v1/search/book.json', {
                     params: {
                         query: search,
                         display: 10,
@@ -56,19 +56,22 @@ class Home extends React.Component {
     // 다만 해당 이벤트의 고유 기능은 사용하지 않기에 e.preventDefault()를 사용하여 막아두었습니다
     // 출처: https://msyu1207.tistory.com/entry/React로-영화-정보를-검색해보자-두번째-네이버-API-사용-CORS-설정-하기 [Lotts Blog]
     handleChange = (e) => {
-        this.setState({ value: e.target.value });
-    };
-
-    handleChangeId = (e) => {
-        this.setState({ clientId: e.target.clientId });
-    };
-
-    handleChangeKey = (e) => {
-        this.setState({ secretKey: e.target.secretKey });
+        // Computed property names 방식
+        // const items = ["A","B","C"];
+        // const obj = {
+        // [items]: "Hello"
+        // }
+        // console.log(obj); // A,B,C: "Hello"
+        // console.log(obj["A,B,C"]) // "Hello"
+        this.setState({ [e.target.name]: e.target.value });
     };
 
     handleSubmit = (e) => {
+        // 페이지 리로딩 방지
         e.preventDefault();
+        // console.log(this.state.value);
+        // console.log(this.state.clientId);
+        // console.log(this.state.secretKey);
         this.getBook();
     };
 
@@ -89,9 +92,9 @@ class Home extends React.Component {
                                 <div>
                                     <div className="input_div">
                                         <h1>도서 검색</h1>
-                                        <input className="input_search" type="text" value={this.state.value} onChange={this.handleChange} placeholder="도서명을 검색해 보세요." />
-                                        <input className="input_clientid" type="text" value={this.state.clientId} onChange={this.handleChangeId} placeholder="API Client ID를 입력하세요" />
-                                        <input className="input_secretkey" type="text" value={this.state.secretKey} onChange={this.handleChangeKey} placeholder="API Scret Key를 입력하세요." />
+                                        <input className="input_search" type="text" value={this.state.value} onChange={this.handleChange} name="value" placeholder="도서명을 검색해 보세요." />
+                                        <input className="input_clientid" type="text" value={this.state.clientId} onChange={this.handleChange} name="clientId" placeholder="API Client ID를 입력하세요" />
+                                        <input className="input_secretkey" type="text" value={this.state.secretKey} onChange={this.handleChange} name="secretKey" placeholder="API Scret Key를 입력하세요." />
                                         <button type="submit">검색</button>
                                     </div>
                                     <div className="books"> {

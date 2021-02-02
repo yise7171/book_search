@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const port = process.env.PORT || 3001;
+const port = 3001;
 const axios = require('axios');
 
 const ID_KEY = 'c9eO1L0uOQFb2BfbAaRD';
@@ -12,7 +12,7 @@ app.use(cors());
 
 app.use(bodyParser.json());
 
-app.use('/search', (req, res) => {
+app.use('/', (req, res) => {
     console.log('server-search');
     const word = req.query.query;
     console.log(word);
